@@ -17,7 +17,43 @@ code {
   justify-content: center;
   margin: 1rem;
 }
+.content-wrapper h1 + div {
+  min-width: 990px;
+  margin: 0 2rem;
+}
 h1 {
   flex: 1 1 100%;
   text-align: center;
+}
+.address-heading {
+  width: 100%;
+}
+.button-wrapper {
+  min-width: 600px;
+}
+.button-wrapper div {
+  display: inline-block;
+  margin-right: .5rem;
+  margin-bottom: .5rem;
+}
+.buttonStyle {
+  background-color: #fff;
+  color: #222;
+  border-radius: .5rem;
+  border: solid 1px #aaa;
+  padding: 0.5rem 1.2rem;
+  font-size: 1.3rem;
+}
+.buttonStyle:hover {
+  background-color: #9cc0fa;
+  color: #fff;
+}
+.buttonStyle:active {
+  background-color: gray;
+  color: #fff;
+}
+.locations-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 2rem;
 }

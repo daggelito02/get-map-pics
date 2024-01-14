@@ -1,7 +1,7 @@
 import React from 'react';
 
 const LocationPictures = (props) => {
-    console.log('data pics: ', props.picturesData);
+    //console.log('data pics: ', props.picturesData);
   return (
     <>
         {

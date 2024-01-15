@@ -25,7 +25,7 @@ const App = () => {
   const apikey = '4be14d0aadcd2bf236664597b159266c';
   const markerId = 123;
   const otherFlickerparams = '&method=flickr.photos.search&per_page=3&has_geo=1&format=json&nojsoncallback=1';
-  let longLatParams = '&lat=55.606000&lon=12.993999';
+  let longLatParams = '&lat=55.606000&lon=12.993999'; //default location Malmö
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: 'AIzaSyDwGQGGoMZbLsSeUIk8tDOegcxBJm-d3fA',

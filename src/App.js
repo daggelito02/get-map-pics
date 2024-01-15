@@ -25,16 +25,18 @@ const App = () => {
 const [markerData, setmarkerData] = useState([]); 
 const [markers, setMarkers] = useState([]);
 const [pictures, setPictures] = useState([]);
+const [isLoading, setLoading] = useState(false);
+const [showSpinner, setSpinner] = useState(true);
 const flickerBaseAddress = 'https://api.flickr.com/services/rest/?api_key='
 const apikey = '4be14d0aadcd2bf236664597b159266c';
+const markerId = 123;
 let longLatParams = '&lat=55.606000&lon=12.993999';
 const otherFlickerparams = '&method=flickr.photos.search&per_page=3&has_geo=1&format=json&nojsoncallback=1';
 
 
 const getFlickerRequest = async (markers) => {
-  //console.log('markers: ',markers);
   if(markers[0]) {
-    console.log('markers.lat: ',markers[0].lat + ' markers.lng: ', markers[0].lng);
+    //console.log('markers.lat: ',markers[0].lat + ' markers.lng: ', markers[0].lng);
     longLatParams = '&lat=' + markers[0].lat + '&lon=' + markers[0].lng;
   }
   const url = flickerBaseAddress + apikey + longLatParams + otherFlickerparams;
@@ -49,9 +51,13 @@ const getFlickerRequest = async (markers) => {
     //   console.log('imgUrl: ', imgUrl);
     //   //setPictures(responseJson.stat);
     // }
+    setLoading(false);
+    setSpinner(true);
     setTimeout(() => {
-      console.log("Delayed for 1 second.");
-    }, "1000");
+      //console.log("Delayed for 1 second.");
+      setLoading(true);
+      setSpinner(false);
+    }, "500");
     setPictures(responseJson.photos.photo);
     //console.log('setPictures: ',responseJson.photos.photo)
   }
@@ -78,6 +84,14 @@ const addMarkerToMap = (marker) => {
     }
   ]);
 };
+const onMapClick = (e) => {
+  setMarkers(() => [
+    {
+      lat: e.latLng.lat(),
+      lng: e.latLng.lng()
+    }
+  ]);
+};
 
   if (loadError) {
     return <div>Error loading maps</div>;
@@ -87,13 +101,22 @@ const addMarkerToMap = (marker) => {
   }
   return (
     <>
-    <div className="content-wrapper">
-      <h1>
-        Get some nice pictures from the Malmö map
+    <h1>
+        Get some nice pictures from the map
       </h1>
+    <div className="content-wrapper">
+      <div className="locations-wrapper">
+        <LocationHeading heading="Location buttons"/>
+        <div className="button-wrapper">
+          <LocationButtons 
+            markerButtons={markerData} 
+            handelButtonClick={addMarkerToMap} />
+        </div>
+      </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={14.25}
+        onClick={onMapClick}
         center={center}
         options={{
           styles: [
@@ -103,21 +126,15 @@ const addMarkerToMap = (marker) => {
           ],
         }} >
         {markers.map((marker) => (
-        <MarkerF key={marker.markerId}
+        <MarkerF key={markerId}
           position={{
             lat: marker.lat,
             lng: marker.lng
           }} />
         ))}
       </GoogleMap>
-      <div className="locations-wrapper">
-        <LocationHeading heading="Location buttons"/>
-        <div className="button-wrapper">
-          <LocationButtons 
-            markerButtons={markerData} 
-            handelButtonClick={addMarkerToMap} />
-        </div>
-      </div>
+      
+      {isLoading && 
       <div className="location-picture-wrapper">
         <LocationHeading heading="Location pictures"/>
         <div className="pictures-wrapper">
@@ -125,7 +142,9 @@ const addMarkerToMap = (marker) => {
             picturesData={pictures} 
             />
         </div>
-      </div>
+      </div>}
+      {showSpinner && 
+      <div className='spinner'>Spinner</div>}
     </div>
     </>
   );

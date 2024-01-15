@@ -16,7 +16,7 @@ code {
   flex-wrap: wrap;
   margin: 0 1rem 1rem;
 }
-.content-wrapper h1 + div {
+.content-wrapper .locations-wrapper + div {
   min-width: 990px;
   margin: 0 2rem!important;
   max-width: 1600px;
@@ -63,7 +63,6 @@ h1 {
 }
 .pictures-wrapper {
   display: flex;
-  margin-top: -1rem;
   width: 100%;
   max-width: 700px;
   min-width: 500px;
@@ -74,4 +73,7 @@ h1 {
 }
 .picture-container img{
   width: 100%;
+}
+.caption-text {
+  margin-top: .2rem;
 }

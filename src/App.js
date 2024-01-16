@@ -93,17 +93,9 @@ const App = () => {
           Get some nice pictures from the map
       </h1>
       <p className='info-text'>Click on the map or choose a button to get local pictures from flickr.</p>
-      <div className="locations-wrapper">
-        <LocationHeading heading="Location buttons"/>
-        <div className="button-wrapper">
-          <LocationButtons 
-            markerButtons={markerData} 
-            handelButtonClick={addMarkerToMap} />
-        </div>
-      </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={14.25}
+        zoom={13.8}
         onClick={onMapClick}
         center={center}
         options={{
@@ -121,6 +113,14 @@ const App = () => {
           }} />
         ))}
       </GoogleMap>
+      <div className="locations-wrapper">
+        <LocationHeading heading="Location buttons"/>
+        <div className="button-wrapper">
+          <LocationButtons 
+            markerButtons={markerData} 
+            handelButtonClick={addMarkerToMap} />
+        </div>
+      </div>
       <div className="location-picture-wrapper">
         <LocationHeading heading="Location pictures"/>
       </div>

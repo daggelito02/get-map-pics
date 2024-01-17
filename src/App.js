@@ -23,20 +23,21 @@ const App = () => {
   const [showSpinner, setSpinner] = useState(true);
   const flickerBaseAddress = 'https://api.flickr.com/services/rest/?api_key='
   const apikey = '4be14d0aadcd2bf236664597b159266c';
-  const markerId = 123;
-  const otherFlickerparams = '&method=flickr.photos.search&per_page=3&has_geo=1&format=json&nojsoncallback=1';
+  const sortParams = '&sort=interestingness-desc&accuracy=11';
+  const otherFlickerparams = '&method=flickr.photos.search&per_page=18&has_geo=1&format=json&nojsoncallback=1';
   let longLatParams = '&lat=55.606000&lon=12.993999'; //default location Malmö
+  const markerId = 123;
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: 'AIzaSyDwGQGGoMZbLsSeUIk8tDOegcxBJm-d3fA',
     libraries,
   });
-
+  
   const getFlickerRequest = async (markers) => {
     if(markers[0]) {
       longLatParams = '&lat=' + markers[0].lat + '&lon=' + markers[0].lng;
     }
-    const url = flickerBaseAddress + apikey + longLatParams + otherFlickerparams;
+    const url = flickerBaseAddress + apikey + longLatParams + otherFlickerparams + sortParams;
     const response = await fetch(url); 
     const responseJson = await response.json();
     if(responseJson.stat){
@@ -124,16 +125,18 @@ const App = () => {
       <div className="location-picture-wrapper">
         <LocationHeading heading="Location pictures"/>
       </div>
-      {isLoading && 
+      
       <div className="location-picture-wrapper">
-        <div className="pictures-wrapper">
+       {isLoading &&  <div className="pictures-wrapper">
           <LocationPictures 
             picturesData={pictures} 
             />
-        </div>
-      </div>}
-      {showSpinner && 
+        </div>}
+        {showSpinner && 
       <div className='lds-hourglass spinner'></div>}
+      </div>
+      {/* <div className='lds-hourglass spinner'></div> */}
+      
     </div>
     </>
   );

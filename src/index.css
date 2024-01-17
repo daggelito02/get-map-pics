@@ -68,18 +68,20 @@ h1 {
 .location-picture-wrapper {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 2rem;
+  margin-left: 2.4rem;
   width: 100%;
+  max-width: 1020px;
 }
 .pictures-wrapper {
   display: flex;
   width: 100%;
+  flex-wrap: wrap;
 }
 .picture-container {
   margin-right: 2rem;
   width: 100%;
-  max-width: 150px;
-  min-width: 150px;
+  max-width: 138px;
+  min-width: 138px;
 }
 .picture-container img{
   width: 100%;
